@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EmployeePayRollServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-21T16:06:00" hostname="DESKTOP-8P64EGP" time="0.366">
+  <properties/>
+  <testcase name="givenEmployeePayroll_Should_Match_Count()" classname="EmployeePayRollServiceTest" time="0.366"/>
+  <system-out><![CDATA[Driver loaded
+Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
+Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@29f2cf49
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

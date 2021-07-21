@@ -7,7 +7,7 @@ import java.util.Enumeration;
 
 public class DBDemo {
     public static void main(String[] args) {
-        String jdbcURL = "jdbc:mysql://localhost:3306/payrollservice?useSSL=false";
+        String jdbcURL = "jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false";
         String userName = "root";
         String password = "Chocoslam!123";
         Connection con;
