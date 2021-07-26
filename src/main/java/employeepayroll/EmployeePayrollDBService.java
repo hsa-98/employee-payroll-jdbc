@@ -1,10 +1,11 @@
 package employeepayroll;
-import  Exception.EmployeePayrollException;
+
+import Exception.EmployeePayrollException;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class EmployeePayrollDBService {
@@ -53,22 +54,15 @@ public class EmployeePayrollDBService {
      */
     public List<EmployeePayrollData> readData() throws EmployeePayrollException {
         String sql = "SELECT * FROM employeedata";
-        List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
-        try (Connection connection = this.getConnection();) {
+        return this.getEmployeeDataUsingDB(sql);
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                Double salary = resultSet.getDouble("salary");
-                LocalDate start = resultSet.getDate("start").toLocalDate();
-                employeePayrollDataList.add(new EmployeePayrollData(id, name, salary, start));
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new EmployeePayrollException("Check Read data");
-        }
-        return employeePayrollDataList;
+    }
+
+    public List<EmployeePayrollData> getEmployeeForDateRange(LocalDate startDate, LocalDate endDate) throws EmployeePayrollException {
+        String sql = String.format("Select * FROM employeedata WHERE Start BETWEEN '%s' AND '%s';",
+                Date.valueOf(startDate), Date.valueOf(endDate));
+        return this.getEmployeeDataUsingDB(sql);
+
     }
 
     public List<EmployeePayrollData> getEmployeePayrollData(String name) throws EmployeePayrollException {
@@ -82,7 +76,7 @@ public class EmployeePayrollDBService {
 
 
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
         return employeePayrollDataList;
     }
@@ -105,8 +99,21 @@ public class EmployeePayrollDBService {
         return employeePayrollData;
     }
 
+    private List<EmployeePayrollData> getEmployeeDataUsingDB(String sql) throws EmployeePayrollException{
+        List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
+        try (Connection connection = this.getConnection()) {
 
-    private void preparedStatementForEmployeeData() throws  EmployeePayrollException {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            employeePayrollDataList = this.getEmployeePayrollData(resultSet);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new EmployeePayrollException("Check Read data");
+        }
+        return employeePayrollDataList;
+    }
+
+
+    private void preparedStatementForEmployeeData() throws EmployeePayrollException {
         try {
             Connection connection = this.getConnection();
             String sql = "SELECT * FROM employeedata WHERE name =?";
@@ -128,7 +135,9 @@ public class EmployeePayrollDBService {
             Statement statement = connection.createStatement();
             return statement.executeUpdate(sql);
         } catch (SQLException | ClassNotFoundException e) {
-            throw new EmployeePayrollException("check updateEmployeeDataUsingStatement") ;
+            throw new EmployeePayrollException("check updateEmployeeDataUsingStatement");
         }
     }
+
+
 }

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="EmployeePayRollServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-25T12:15:48" hostname="DESKTOP-8P64EGP" time="0.566">
+<testsuite name="EmployeePayRollServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-26T17:08:16" hostname="DESKTOP-8P64EGP" time="0.371">
   <properties/>
-  <testcase name="givenNewSalary_WhenUpdated_ShouldMatch()" classname="EmployeePayRollServiceTest" time="0.566"/>
+  <testcase name="givenDateRange_WhenRetrieved_ShouldMatchEmployeeCount()" classname="EmployeePayRollServiceTest" time="0.371"/>
   <system-out><![CDATA[Driver loaded
 Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@6e38f5c6
+Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@60628128
 Driver loaded
 Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@7a6cb902
-Driver loaded
-Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@64836356
+Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@64d55dda
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

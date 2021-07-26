@@ -1,5 +1,6 @@
 package employeepayroll;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import  Exception.EmployeePayrollException;
@@ -9,14 +10,18 @@ public class EmployeePayrollService {
     private List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
 
 
-    public EmployeePayrollService() {
+    public EmployeePayrollService()   {
         employeePayrollDBService = EmployeePayrollDBService.getInstance();
     }
 
-    public Boolean checkEmployeePayRollInSync(String name) throws EmployeePayrollException {
-        List<EmployeePayrollData> employeePayrollData = employeePayrollDBService.getEmployeePayrollData(name);
-        return employeePayrollData.get(0).equals(getEmployeePayrollData(name));
+    public List<EmployeePayrollData> readEmployeePayrollForDateRange(IOService ioService,
+                                                                     LocalDate startDate, LocalDate endDate)
+                                                                        throws EmployeePayrollException {
+        if(ioService.equals(IOService.DB_IO))
+            return employeePayrollDBService.getEmployeeForDateRange(startDate,endDate);
+        return null;
     }
+
 
     public enum IOService {
         DB_IO;
@@ -47,6 +52,11 @@ public class EmployeePayrollService {
         return employeePayrollData;
     }
 
+
+    public Boolean checkEmployeePayRollInSync(String name) throws EmployeePayrollException {
+        List<EmployeePayrollData> employeePayrollData = employeePayrollDBService.getEmployeePayrollData(name);
+        return employeePayrollData.get(0).equals(getEmployeePayrollData(name));
+    }
 
 
 

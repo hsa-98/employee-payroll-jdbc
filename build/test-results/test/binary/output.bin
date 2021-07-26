@@ -1,9 +1,6 @@
 Driver loaded
 RConnecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-FConnection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@6e38f5c6
+FConnection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@60628128
 Driver loaded
 RConnecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-FConnection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@7a6cb902
-Driver loaded
-RConnecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-FConnection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@64836356
+FConnection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@64d55dda
