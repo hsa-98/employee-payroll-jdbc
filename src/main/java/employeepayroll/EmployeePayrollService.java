@@ -1,54 +1,53 @@
 package employeepayroll;
 
-import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import  Exception.EmployeePayrollException;
 
 public class EmployeePayrollService {
-    /**
-     *  the function establishes a connection with sql server and returns the connection to the caler
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     */
-    private Connection getConection() throws SQLException, ClassNotFoundException {
-        String jdbcURL = "jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false";
-        String userName = "root";
-        String password = "Chocoslam!123";
-        Connection con;
+    private EmployeePayrollDBService employeePayrollDBService;
+    private List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        System.out.println("Driver loaded");
-        System.out.println("Connecting to database " + jdbcURL);
-        con = DriverManager.getConnection(jdbcURL, userName, password);
-        System.out.println("Connection is successful!!!" + con);
-        return con;
+
+    public EmployeePayrollService() {
+        employeePayrollDBService = EmployeePayrollDBService.getInstance();
     }
 
-    /**
-     * This method reads data from sql server and returns the data as a list.
-     * @return
-     */
-    public List<EmployeePayrollData> readData(){
-        String sql = "SELECT * FROM employeedata";
-        List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
-        try {
-            Connection connection = this.getConection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()){
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                Double salary = resultSet.getDouble("salary");
-                LocalDate start = resultSet.getDate("start").toLocalDate();
-                employeePayrollDataList.add(new EmployeePayrollData(id,name,salary,start));
-            }
-        }
-        catch (SQLException | ClassNotFoundException e){
-            e.printStackTrace();
-        }
+    public Boolean checkEmployeePayRollInSync(String name) throws EmployeePayrollException {
+        List<EmployeePayrollData> employeePayrollData = employeePayrollDBService.getEmployeePayrollData(name);
+        return employeePayrollData.get(0).equals(getEmployeePayrollData(name));
+    }
+
+    public enum IOService {
+        DB_IO;
+    }
+
+    public List<EmployeePayrollData> readData(IOService ioService) throws EmployeePayrollException {
+        if (ioService.equals(IOService.DB_IO))
+            employeePayrollDataList = employeePayrollDBService.readData();
         return employeePayrollDataList;
     }
+
+
+    public void updateEmployeeSalary(String name, double salary) throws EmployeePayrollException {
+        int result = employeePayrollDBService.updateEmployeeData(name, salary);
+        if (result == 0)
+            return;
+        EmployeePayrollData employeePayrollData = getEmployeePayrollData(name);
+        if (employeePayrollData == null) return;
+        employeePayrollData.salary = salary;
+    }
+
+
+    private EmployeePayrollData getEmployeePayrollData(String name) {
+        EmployeePayrollData employeePayrollData = employeePayrollDataList.stream()
+                .filter(x -> x.name.equals(name))
+                .findFirst()
+                .orElse(null);
+        return employeePayrollData;
+    }
+
+
+
+
 }
