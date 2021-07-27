@@ -5,7 +5,9 @@ import Exception.EmployeePayrollException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class EmployeePayrollDBService {
@@ -140,4 +142,21 @@ public class EmployeePayrollDBService {
     }
 
 
+    public Map<String, Double> getAvgSalaryByGender() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT gender,AVG(SALARY) as avg_Salary from employeedata GROUP BY gender;";
+        Map<String,Double>avgSalary = new HashMap<>();
+        try(Connection connection=this.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                String gender = resultSet.getString("gender");
+                Double salary = resultSet.getDouble("avg_salary");
+                avgSalary.put(gender,salary);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return avgSalary;
+    }
 }

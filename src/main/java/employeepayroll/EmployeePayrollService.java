@@ -1,8 +1,11 @@
 package employeepayroll;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import  Exception.EmployeePayrollException;
 
 public class EmployeePayrollService {
@@ -19,6 +22,13 @@ public class EmployeePayrollService {
                                                                         throws EmployeePayrollException {
         if(ioService.equals(IOService.DB_IO))
             return employeePayrollDBService.getEmployeeForDateRange(startDate,endDate);
+        return null;
+    }
+
+    public Map<String, Double> getAvgSalaryByGender(IOService ioService) throws SQLException, ClassNotFoundException {
+        Map<String,Double>avgSalary;
+        if(ioService.equals(IOService.DB_IO))
+                return avgSalary = employeePayrollDBService.getAvgSalaryByGender();
         return null;
     }
 
