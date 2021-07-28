@@ -33,6 +33,8 @@ public class EmployeePayrollService {
     }
 
 
+
+
     public enum IOService {
         DB_IO;
     }
@@ -53,6 +55,9 @@ public class EmployeePayrollService {
         employeePayrollData.salary = salary;
     }
 
+    public void addEmployee(String name, String gender, Double salary, LocalDate start) throws SQLException, ClassNotFoundException {
+        employeePayrollDataList.add(employeePayrollDBService.addEmployeeToDB(name,gender,salary,start));
+    }
 
     private EmployeePayrollData getEmployeePayrollData(String name) {
         EmployeePayrollData employeePayrollData = employeePayrollDataList.stream()

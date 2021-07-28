@@ -46,4 +46,13 @@ public class EmployeePayRollServiceTest {
 
         Assertions.assertTrue(avgSalary.get("M").equals(175000.00)  && avgSalary.get("F").equals(180000.00));
     }
+
+    @Test
+    void givenNewEmployee_ShouldSyncWithDB() throws SQLException, ClassNotFoundException, EmployeePayrollException {
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        employeePayrollService.readData(EmployeePayrollService.IOService.DB_IO);
+        employeePayrollService.addEmployee("Amey","M",500000.00,LocalDate.now());
+        Boolean result = employeePayrollService.checkEmployeePayRollInSync("Amey");
+        Assertions.assertTrue(result);
+    }
 }
