@@ -25,10 +25,9 @@ public class EmployeePayrollService {
         return null;
     }
 
-    public Map<String, Double> getAvgSalaryByGender(IOService ioService) throws SQLException, ClassNotFoundException {
-        Map<String,Double>avgSalary;
+    public Map<String, Double> getAvgSalaryByGender(IOService ioService) throws  EmployeePayrollException {
         if(ioService.equals(IOService.DB_IO))
-                return avgSalary = employeePayrollDBService.getAvgSalaryByGender();
+                return  employeePayrollDBService.getAvgSalaryByGender();
         return null;
     }
 

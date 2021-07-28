@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="EmployeePayRollServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-27T20:03:32" hostname="DESKTOP-8P64EGP" time="0.649">
+<testsuite name="EmployeePayRollServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-28T15:57:46" hostname="DESKTOP-8P64EGP" time="0.854">
   <properties/>
-  <testcase name="givenNewEmployee_ShouldSyncWithDB()" classname="EmployeePayRollServiceTest" time="0.649"/>
+  <testcase name="givenNewEmployee_ShouldSyncWithDB()" classname="EmployeePayRollServiceTest" time="0.854"/>
   <system-out><![CDATA[Driver loaded
 Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@17e19416
+Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@6a76b02a
 Driver loaded
 Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@56c34e23
+Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@39e68e9f
 Driver loaded
 Connecting to database jdbc:mysql://localhost:3306/payrollservicedb?useSSL=false
-Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@790d576e
+Connection is successful!!!com.mysql.cj.jdbc.ConnectionImpl@544a2a17
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
